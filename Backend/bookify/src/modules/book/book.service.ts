@@ -8,9 +8,8 @@ export class BookService {
   constructor(
     @InjectModel(Book.name)
     private readonly bookModel: Model<BookDocument>,
-    @InjectModel(User.name) private readonly userModel: Model<UserDocument>,
-  ) // private readonly logger: Logger,
-  {}
+    @InjectModel(User.name) private readonly userModel: Model<UserDocument>, // private readonly logger: Logger,
+  ) {}
 
   async getBooks() {
     return await this.bookModel.find();

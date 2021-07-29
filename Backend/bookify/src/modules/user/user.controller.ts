@@ -1,4 +1,9 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 
-@Controller('user')
-export class UserController {}
+@Controller('users')
+export class UserController {
+  @Get('email/:email')
+  async getUserByEmail(@Param('email') email: string) {
+    return await this.getUserByEmail(email);
+  }
+}
