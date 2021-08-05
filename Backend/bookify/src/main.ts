@@ -18,8 +18,8 @@ moment.locale('en');
 moment.updateLocale('en', { week: { dow: 1 } }); //first day of week is Monday
 
 const server = Express();
-server.get('/', (req, res) => res.send('Bookify'));
-server.get('/_ah/health', (req, res) => res.send('Bookify'));
+server.get('/', (req, res) => res.send('ok'));
+server.get('/_ah/health', (req, res) => res.send('ok'));
 server.get('/status', (req, res) => res.status(204).send());
 
 async function bootstrap() {

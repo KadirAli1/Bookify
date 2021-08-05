@@ -19,7 +19,7 @@ export class Book {
   author: string;
 
   @Prop()
-  tags: string[]; 
+  tags: string[];
 }
 
-export const userSchem = SchemaFactory.createForClass(Book);
+export const BookSchema = SchemaFactory.createForClass(Book);

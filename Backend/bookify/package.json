@@ -28,6 +28,7 @@
     "@nestjs/platform-express": "^8.0.0",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
+    "file-system": "^2.2.2",
     "firebase-admin": "^9.11.0",
     "mongoose": "^5.13.4",
     "nest-winston": "^1.5.0",

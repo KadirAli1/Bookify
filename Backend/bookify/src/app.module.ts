@@ -20,7 +20,7 @@ import { UserModule } from './modules/user/user.module';
     AuthModule,
     UserModule,
     AdminsModule,
-    // BookModule,
+    BookModule,
   ],
   controllers: [],
   providers: [Logger],

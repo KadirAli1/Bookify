@@ -25,13 +25,15 @@ export class BookController {
   // // uploadFile(@UploadedFiles() files: Array<Express.Multer.File>) {
   //   console.log(files);
   // }
-
+  // @Get('/upload')
+  // async uploadFile1() {
+  //   return this.bookServices.uploadFile(null);
+  // }
+  //@Body() body: BookDTO,
   @UseInterceptors(FileInterceptor('file'))
   @Post('file')
-  uploadFile(@Body() body: BookDTO, @UploadedFile() file: Express.Multer.File) {
-    return {
-      body,
-      file: file.buffer.toString(),
-    };
+  uploadFile(@UploadedFile() file: Express.Multer.File) {
+    var test = this.bookServices.uploadFile(null, file);
+    return true;
   }
 }
