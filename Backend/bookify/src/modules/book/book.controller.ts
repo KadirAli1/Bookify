@@ -1,7 +1,9 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
   UploadedFile,
   UploadedFiles,
@@ -10,6 +12,7 @@ import {
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { BookService } from './book.service';
 import { BookDTO } from './dto/update-book.dto';
+import { Book } from './schemas/book.schema';
 
 @Controller('books')
 export class BookController {
@@ -19,21 +22,20 @@ export class BookController {
   async GetBooks() {
     return this.bookServices.getBooks();
   }
-  //Diskutim me Egzonin!
-  // @Post('upload')
-  // @UseInterceptors(FilesInterceptor('files'))
-  // // uploadFile(@UploadedFiles() files: Array<Express.Multer.File>) {
-  //   console.log(files);
-  // }
-  // @Get('/upload')
-  // async uploadFile1() {
-  //   return this.bookServices.uploadFile(null);
-  // }
-  //@Body() body: BookDTO,
+
   @UseInterceptors(FileInterceptor('file'))
   @Post('file')
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
-    var test = this.bookServices.uploadFile(null, file);
-    return true;
+  uploadFile(
+    // @Param('book_id') book_id: string,
+    @Body() body: BookDTO,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    var test = 1;
+    return this.bookServices.uploadFile(body, file);
+  }
+
+  @Delete(':file_id')
+  deleteFile(@Param('file_id') file_id: string): Promise<Book> {
+    return this.bookServices.deleteFile(file_id);
   }
 }

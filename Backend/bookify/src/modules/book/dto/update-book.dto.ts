@@ -11,8 +11,8 @@ export class BookDTO {
   @IsOptional()
   year_of_publish: string;
 
-  @IsArray()
-  tags: string[];
+  // @IsArray()
+  // tags: string[];
 
   @IsString()
   author: string;

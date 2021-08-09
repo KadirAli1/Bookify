@@ -1,10 +1,7 @@
 import { file } from '@babel/types';
-import { Injectable, Logger } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import {
-  MulterModuleOptions,
-  MulterOptionsFactory,
-} from '@nestjs/platform-express';
+
 import { Model } from 'mongoose';
 import { User, UserDocument } from '../user/schemas/user.schema';
 import { BookDTO } from './dto/update-book.dto';
@@ -12,6 +9,20 @@ import { Book, BookDocument } from './schemas/book.schema';
 
 const fs = require('fs');
 const path = require('path');
+// var tags: Array<String>;
+const tags = [
+  'IT',
+  'Algoritham',
+  'Math',
+  'OS',
+  'Drama',
+  'History',
+  'Autobiography',
+  'Fantasy',
+  'Horror',
+  'Romance',
+  '',
+];
 
 @Injectable()
 export class BookService {
@@ -37,24 +48,34 @@ export class BookService {
     return true;
   }
 
-  async uploadFile(updateBookDTO: BookDTO, file: Express.Multer.File) {
-    let baseDir = path.join(process.env.PWD, '/files/');
-    // fs.open(`${baseDir}+result.txt`, 'wx', (err, desc) => {
-    //   if (!err && desc) {
-    //     fs.writeFile(desc, 'sample data', (err) => {
-    //       // Rest of your code
+  async uploadFile(
+    // book_id: string,
+    updateBookDTO: BookDTO,
+    file: Express.Multer.File,
+  ) {
+    try {
+      let { title, author, year_of_publish, owner } = updateBookDTO;
 
-    //       if (err) throw err;
-    //       console.log('Results Received');
-    //     });
-    //   }
-    // });
-    fs.writeFile(baseDir + file.originalname, file.buffer, (writeFileError) => {
-      if (writeFileError) {
-        return;
-      }
-    });
-    return true;
+      let baseDir = path.join(process.env.PWD, '/files/');
+      let filePath = baseDir + file.originalname;
+      fs.writeFile(filePath, file.buffer, (writeFileError) => {
+        if (writeFileError) {
+          return;
+        }
+      });
+
+      //DB
+      const result = await this.bookModel.create({
+        title,
+        author,
+        url: filePath,
+        year_of_publish,
+      });
+
+      return result;
+    } catch (err) {
+      throw new HttpException('Validation failed', HttpStatus.BAD_REQUEST);
+    }
   }
 
   async saveFileDataToDB(bookDTO: BookDTO) {
@@ -63,13 +84,13 @@ export class BookService {
   }
 
   //Delete book
-  async deleteBook(id: string): Promise<Book> {
+  async deleteFile(file_id: string): Promise<Book> {
     //delete path from
-    var fs = require('fs');
-    fs.unlink(id, function (err) {
-      // console.log('deleted', id);
-    });
+
+    // fs.unlink(file_id, function (err) {
+    // console.log('deleted', id);
+    // });
     //delete file from
-    return await this.bookModel.findByIdAndDelete(id);
+    return await this.bookModel.findByIdAndRemove(file_id);
   }
 }

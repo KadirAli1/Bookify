@@ -23,7 +23,7 @@ export class UserController {
   }
 
   @Get()
-   // @AuthUser()
+  // @AuthUser()
   async getUserDetalis(@GetUser() user: UserDocument) {
     const testUser = await user.populate('owner_of', 'name').execPopulate();
     return testUser;
