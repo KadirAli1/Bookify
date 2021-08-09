@@ -84,16 +84,16 @@ export class BookService {
   }
 
   //Delete book
-  async deleteFile(file_id: string): Promise<Book> {
+  async deleteFile(book_id: string): Promise<Book> {
     //1st step: get the ID of the book we want to delete
     //2nd step: find the document of that book from DB
-    const book = await this.bookModel.findById(file_id);
+    const book = await this.bookModel.findById(book_id);
 
     //3rd step: using the URL that we get from the document of the book with the given ID, try to delete that file from the folder
     try {
       await unlink(book.url);
       console.log(`successfully deleted ${book.url}`);
-      return await this.bookModel.findByIdAndRemove(file_id);
+      return await this.bookModel.findByIdAndRemove(book_id);
     } catch (error) {
       console.error('there was an error:', error.message);
     }
