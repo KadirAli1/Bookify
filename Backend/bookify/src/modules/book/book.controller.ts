@@ -36,6 +36,7 @@ export class BookController {
 
   @Delete(':file_id')
   deleteFile(@Param('file_id') file_id: string): Promise<Book> {
+    var test = 1;
     return this.bookServices.deleteFile(file_id);
   }
 }

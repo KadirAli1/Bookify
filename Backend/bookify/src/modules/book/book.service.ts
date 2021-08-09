@@ -1,4 +1,3 @@
-import { file } from '@babel/types';
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
@@ -7,6 +6,7 @@ import { User, UserDocument } from '../user/schemas/user.schema';
 import { BookDTO } from './dto/update-book.dto';
 import { Book, BookDocument } from './schemas/book.schema';
 
+import { unlink } from 'fs/promises';
 const fs = require('fs');
 const path = require('path');
 // var tags: Array<String>;
@@ -85,12 +85,18 @@ export class BookService {
 
   //Delete book
   async deleteFile(file_id: string): Promise<Book> {
-    //delete path from
+    //1st step: get the ID of the book we want to delete
+    //2nd step: find the document of that book from DB
+    const book = await this.bookModel.findById(file_id);
 
-    // fs.unlink(file_id, function (err) {
-    // console.log('deleted', id);
-    // });
-    //delete file from
-    return await this.bookModel.findByIdAndRemove(file_id);
+    //3rd step: using the URL that we get from the document of the book with the given ID, try to delete that file from the folder
+    try {
+      await unlink(book.url);
+      console.log(`successfully deleted ${book.url}`);
+      return await this.bookModel.findByIdAndRemove(file_id);
+    } catch (error) {
+      console.error('there was an error:', error.message);
+    }
+    //4th step: if 3rd step successful! -> Remove the document with the given ID from the DB
   }
 }
