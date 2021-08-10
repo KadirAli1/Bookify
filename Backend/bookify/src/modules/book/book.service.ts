@@ -78,11 +78,6 @@ export class BookService {
     }
   }
 
-  async saveFileDataToDB(bookDTO: BookDTO) {
-    var fs = require('fs');
-    fs.readFile('text.js');
-  }
-
   //Delete book
   async deleteFile(book_id: string): Promise<Book> {
     //1st step: get the ID of the book we want to delete

@@ -17,13 +17,13 @@ import { User, UserDocument } from './schemas/user.schema';
 export class UserController {
   userService: any;
   @Get('email/:email')
-  // @AuthUser()
+  @AuthUser()
   async getUserByEmail(@Param('email') email: string) {
     return await this.getUserByEmail(email);
   }
 
   @Get()
-  // @AuthUser()
+  @AuthUser()
   async getUserDetalis(@GetUser() user: UserDocument) {
     const testUser = await user.populate('owner_of', 'name').execPopulate();
     return testUser;
