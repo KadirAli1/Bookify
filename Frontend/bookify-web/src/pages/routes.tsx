@@ -7,8 +7,8 @@ const Routes = () => {
   //   const { initializing, user } = React.useContext(SessionContext);
   return (
     <>
-      <Dashboard />;
-      <LoginForm />
+      <Dashboard />
+      {/* <LoginForm /> */}
     </>
   );
 };

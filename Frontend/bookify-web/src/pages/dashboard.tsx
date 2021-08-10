@@ -1,14 +1,7 @@
-import {
-  Button,
-  useClipboard,
-  Box,
-  Grid,
-  Link,
-  Text,
-  VStack,
-  Spinner,
-} from "@chakra-ui/react";
-
+import { Spinner } from "@chakra-ui/spinner";
+import { Button } from "@chakra-ui/button";
+import { useClipboard } from "@chakra-ui/hooks";
+import { Box, Grid, Link, Text, VStack } from "@chakra-ui/layout";
 import React from "react";
 import { firebaseAPI } from "../services/firebase/firebaseAPI";
 import { SessionContext } from "../services/firebase/userSession";
@@ -58,6 +51,7 @@ export const Dashboard = () => {
                       </>
                     )}
                     {/* {t("Loggedinuser.28")}: {user.displayName} */}
+                    {user.displayName}
                     <br />
                     <Button onClick={onCopy} ml={2}>
                       {hasCopied ? "Copied" : "Copy jwtToken"}
@@ -69,7 +63,7 @@ export const Dashboard = () => {
                       colorScheme="teal"
                       variant="outline"
                     >
-                      <p>Logout.27</p>
+                      <p>Logout</p>
                     </Button>
                   </>
                 )}

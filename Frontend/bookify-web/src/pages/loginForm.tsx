@@ -104,14 +104,14 @@ export function LoginForm() {
               </Button>
             </InputRightElement>
           </InputGroup>
-          {/* <Checkbox
+          <Checkbox
             onChange={(e) => {
               setRememberMe(e.target.checked);
             }}
             size="sm"
           >
-            <p>"Remember.7</p>
-          </Checkbox> */}
+            <p>Remember</p>
+          </Checkbox>
 
           <Button
             onClick={handleLogin}
@@ -129,7 +129,7 @@ export function LoginForm() {
             colorScheme="teal"
             variant="link"
           >
-            <p>Forgot password.10</p>
+            <p>Forgot password</p>
           </Button>
           <Text>
             <p>Not a member</p>
