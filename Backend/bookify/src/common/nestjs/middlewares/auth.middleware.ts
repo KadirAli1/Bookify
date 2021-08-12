@@ -27,7 +27,7 @@ export async function AuthMiddleware(
 
         next();
       })
-      .catch(() => {
+      .catch((error) => {
         res.status(HttpStatus.FORBIDDEN).json({
           statusCode: HttpStatus.FORBIDDEN,
           timestamp: new Date().toISOString(),

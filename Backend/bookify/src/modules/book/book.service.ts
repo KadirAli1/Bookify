@@ -5,8 +5,10 @@ import { Model } from 'mongoose';
 import { User, UserDocument } from '../user/schemas/user.schema';
 import { BookDTO } from './dto/update-book.dto';
 import { Book, BookDocument } from './schemas/book.schema';
-
+import _ from 'underscore';
 import { unlink } from 'fs/promises';
+
+import { Http } from 'winston/lib/winston/transports';
 const fs = require('fs');
 const path = require('path');
 // var tags: Array<String>;
@@ -78,6 +80,40 @@ export class BookService {
     }
   }
 
+  // async getBookOwners(user: UserDocument, book_id) {
+  //   await this.UserIsBookOwner(user, book_id);
+
+  //   const book = await this.bookModel
+  //     .findOne(
+  //       {
+  //         _id: book_id,
+  //         owners: { $elemMatch: { user: user._id } },
+  //       },
+  //       'owners',
+  //     )
+  //     .lean()
+  //     .populate({
+  //       path: 'owners.user',
+  //       model: User.name,
+  //       select: '_id name email',
+  //     });
+  //   if (!book) throw new HttpException('Error 404', HttpStatus.NOT_FOUND);
+  //   return book.owners;
+  // }
+
+  // async acceptUserRequest(user: UserDocument, book_id: string) {
+  //   const session = await this.bookModel.db.startSession();
+  //   session.startTransaction();
+
+  //   try{
+  //     const {nModified} = await this.bookModel.updateOne({
+  //       _id: book_id,
+
+  //     })
+
+  //   }catch(err){}
+  // }
+
   //Delete book
   async deleteFile(book_id: string): Promise<Book> {
     //1st step: get the ID of the book we want to delete
@@ -94,4 +130,14 @@ export class BookService {
     }
     //4th step: if 3rd step successful! -> Remove the document with the given ID from the DB
   }
+
+  // async UserIsBookOwner(user: UserDocument, book_id: string): Promise<boolean> {
+  //   const isOwner = user.owner_of.some(
+  //     (book) => book._id.toString() == book_id,
+  //   );
+
+  //   if (!isOwner) throw new HttpException('Error 404 ', HttpStatus.NOT_FOUND);
+
+  //   return isOwner;
+  // }
 }

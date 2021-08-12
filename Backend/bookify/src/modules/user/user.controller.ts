@@ -12,10 +12,12 @@ import { GetUser } from 'src/common/nestjs/decorators/user.decorator';
 import { CreateFirebaseAccountDto } from '../auth/dto/create-firebase-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './schemas/user.schema';
+import { UserService } from './user.service';
 
 @Controller('users')
 export class UserController {
-  userService: any;
+  constructor(private userService: UserService) {}
+
   @Get('email/:email')
   @AuthUser()
   async getUserByEmail(@Param('email') email: string) {
