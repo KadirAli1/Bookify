@@ -4,6 +4,7 @@ import { SessionContext } from "../services/firebase/userSession";
 import { LoginForm } from "./loginForm";
 import { RegisterForm } from "./registerForm";
 import { Route } from "react-router-dom";
+import Header from "./header";
 
 const Routes = () => {
   const { initializing, user } = React.useContext(SessionContext);
@@ -19,15 +20,20 @@ const Routes = () => {
             <div style={{ flex: 1 }}>
               {user ? (
                 <>
-                  {/* <Route path="/Login">
+                  <Header />
+                  <Route path="/register">
+                    <RegisterForm />
+                  </Route>
+                  <Route path="/Login">
                     <LoginForm />
-                  </Route> */}
+                  </Route>
                   <Route path="/dashboard">
                     <Dashboard />
                   </Route>
                 </>
               ) : (
                 <>
+                  <Header />
                   <Route path="/register">
                     <RegisterForm />
                   </Route>
