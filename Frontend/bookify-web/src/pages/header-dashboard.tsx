@@ -76,14 +76,14 @@ function HeaderDashboard() {
 
                       <Link
                         as={ReactRouterLink}
-                        to="/user-page"
+                        to="/settings"
                         style={{ textDecoration: "none" }}
                       >
                         <MenuItem fontWeight="bold">Settings</MenuItem>
                       </Link>
                       <Link
                         as={ReactRouterLink}
-                        to="/"
+                        to="/settings"
                         style={{ textDecoration: "none" }}
                       >
                         <MenuItem
@@ -162,14 +162,14 @@ function HeaderDashboard() {
 
                       <Link
                         as={ReactRouterLink}
-                        to="/user-page"
+                        to="/settings"
                         style={{ textDecoration: "none" }}
                       >
                         <MenuItem fontWeight="bold">Settings</MenuItem>
                       </Link>
                       <Link
                         as={ReactRouterLink}
-                        to="/"
+                        to="/settings"
                         style={{ textDecoration: "none" }}
                       >
                         <MenuItem

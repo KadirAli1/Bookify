@@ -87,7 +87,7 @@ function Header() {
                   </Link>
                 </Box>
 
-                <Box p={2} as="h1">
+                {/* <Box p={2} as="h1">
                   <Link
                     p={2}
                     as={ReactRouterLink}
@@ -96,7 +96,7 @@ function Header() {
                   >
                     About
                   </Link>
-                </Box>
+                </Box> */}
 
                 <Box
                   pb="4"

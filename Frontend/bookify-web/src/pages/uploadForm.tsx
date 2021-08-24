@@ -7,6 +7,7 @@ import {
   Center,
   Button,
   useToast,
+  Heading,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import api from "../api";
@@ -60,7 +61,7 @@ function UploadForm() {
     <>
       <Center>
         <Stack spacing={2}>
-          <h1>Upload a File!</h1>
+          <Heading fontSize={"4xl"}>Upload File!</Heading>
           <Input
             placeholder="Title"
             value={title}
@@ -89,7 +90,15 @@ function UploadForm() {
               setUploadFile(e.target.value);
             }}
           ></input>
-          <Button onClick={handleUploadFile} isLoading={isLoading}>
+          <Button
+            colorScheme="green"
+            onClick={handleUploadFile}
+            isLoading={isLoading}
+            _hover={{
+              bgGradient: "linear(to-r, green.400,blue.400)",
+              boxShadow: "xl",
+            }}
+          >
             Save
           </Button>
         </Stack>

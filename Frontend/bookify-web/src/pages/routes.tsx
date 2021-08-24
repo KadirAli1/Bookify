@@ -3,11 +3,12 @@ import * as React from "react";
 import { SessionContext } from "../services/firebase/userSession";
 import { LoginForm } from "./loginForm";
 import { RegisterForm } from "./registerForm";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Header from "./header";
 import { rootCertificates } from "tls";
 import UploadForm from "./uploadForm";
 import HeaderDashboard from "./header-dashboard";
+import Books from "./books";
 
 const Routes = () => {
   const { initializing, user } = React.useContext(SessionContext);
@@ -24,34 +25,44 @@ const Routes = () => {
               {user ? (
                 <>
                   <HeaderDashboard />
-                  <Route path="/uploadFile">
-                    <UploadForm />
-                  </Route>
-                  <Route path="/register">
-                    <RegisterForm />
-                  </Route>
-                  <Route path="/Login">
-                    <LoginForm />
-                  </Route>
-                  <Route path="/dashboard">
-                    <Dashboard />
-                  </Route>
+                  <Switch>
+                    <Route path="/uploadFile">
+                      <UploadForm />
+                    </Route>
+                    <Route path="/register">
+                      <RegisterForm />
+                    </Route>
+                    <Route path="/Login">
+                      <LoginForm />
+                    </Route>
+                    <Route path="/dashboard">
+                      <Dashboard />
+                    </Route>
+                    <Route path="/">
+                      <Books />
+                    </Route>
+                  </Switch>
                 </>
               ) : (
                 <>
                   <Header />
-                  <Route path="/register">
-                    <RegisterForm />
-                  </Route>
-                  <Route path="/Login">
-                    <LoginForm />
-                  </Route>
-                  <Route path="/dashboard">
-                    <Dashboard />
-                  </Route>
-                  {/* <Route path="/uploadForm">
+                  <Switch>
+                    <Route path="/register">
+                      <RegisterForm />
+                    </Route>
+                    <Route path="/Login">
+                      <LoginForm />
+                    </Route>
+                    <Route path="/dashboard">
+                      <Dashboard />
+                    </Route>
+                    <Route path="/">
+                      <Books />
+                    </Route>
+                    {/* <Route path="/uploadForm">
                     <UploadForm />
                   </Route> */}
+                  </Switch>
                 </>
               )}
             </div>

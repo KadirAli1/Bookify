@@ -6,6 +6,10 @@ import "firebase/auth";
 const apiPrefix = "/api";
 
 export default {
+  getAllBooks: async () => {
+    return http.get(apiPrefix + "/books");
+  },
+
   createUser: async (body: IRegisterUser) => {
     return http.post(apiPrefix + "/users", body);
   },
