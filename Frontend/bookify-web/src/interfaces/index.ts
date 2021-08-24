@@ -4,3 +4,8 @@ export type IRegisterUser = {
   surname: string;
   password: string;
 };
+export type IUploadFile = {
+  title: string;
+  yop: string;
+  author: string;
+};

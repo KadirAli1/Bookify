@@ -5,6 +5,9 @@ import { LoginForm } from "./loginForm";
 import { RegisterForm } from "./registerForm";
 import { Route } from "react-router-dom";
 import Header from "./header";
+import { rootCertificates } from "tls";
+import UploadForm from "./uploadForm";
+import HeaderDashboard from "./header-dashboard";
 
 const Routes = () => {
   const { initializing, user } = React.useContext(SessionContext);
@@ -20,7 +23,10 @@ const Routes = () => {
             <div style={{ flex: 1 }}>
               {user ? (
                 <>
-                  <Header />
+                  <HeaderDashboard />
+                  <Route path="/uploadFile">
+                    <UploadForm />
+                  </Route>
                   <Route path="/register">
                     <RegisterForm />
                   </Route>
@@ -43,6 +49,9 @@ const Routes = () => {
                   <Route path="/dashboard">
                     <Dashboard />
                   </Route>
+                  {/* <Route path="/uploadForm">
+                    <UploadForm />
+                  </Route> */}
                 </>
               )}
             </div>

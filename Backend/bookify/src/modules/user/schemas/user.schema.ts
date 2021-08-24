@@ -11,6 +11,7 @@ export class User {
 
   @Prop({ unieuqe: true, reuqired: true })
   email: string;
+
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: Book.name }] })
   owner_of: BookDocument[];
 

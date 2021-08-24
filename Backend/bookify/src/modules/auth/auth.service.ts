@@ -7,8 +7,8 @@ export class AuthService {
   //  Create a new Firebase Authentication Account
   async createFirebaseAccount(
     email: string,
-    name: string,
     password: string,
+    name: string,
     emailVerified: boolean = false,
   ): Promise<admin.auth.UserRecord> {
     try {
