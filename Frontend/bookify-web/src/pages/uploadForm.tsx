@@ -59,9 +59,11 @@ function UploadForm() {
 
   return (
     <>
-      <Center>
-        <Stack spacing={2}>
-          <Heading fontSize={"4xl"}>Upload File!</Heading>
+      <Center marginTop={4}>
+        <Stack spacing={2} m={3} textAlign="center">
+          <Heading text-align="center" fontSize={"4xl"}>
+            Upload File!
+          </Heading>
           <Input
             placeholder="Title"
             value={title}
