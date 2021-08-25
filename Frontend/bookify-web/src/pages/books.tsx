@@ -13,6 +13,7 @@ function Books() {
   useEffect(() => {
     getDatafromBackEnd();
   }, []);
+
   return (
     <ChakraProvider>
       <Container maxW="80rem" centerContent pb="40">
