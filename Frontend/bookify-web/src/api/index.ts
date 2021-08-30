@@ -1,4 +1,4 @@
-import { IRegisterUser, IUploadFile } from "../interfaces";
+import { IRegisterUser, IUpdateUser, IUploadFile } from "../interfaces";
 import http from "../services/axios/http";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -13,9 +13,9 @@ export default {
   createUser: async (body: IRegisterUser) => {
     return http.post(apiPrefix + "/users", body);
   },
-  // updateUser: async (sub: string, body: IUpdateUser) => {
-  //   return http.put(apiPrefix + `/users/${sub}`, body);
-  // },
+  updateUser: async (sub: string, body: IUpdateUser) => {
+    return http.put(apiPrefix + `/users/${sub}`, body);
+  },
   UploadFile: async (body: IUploadFile) => {
     // debugger;
     const data = new FormData();

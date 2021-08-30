@@ -10,3 +10,8 @@ export type IUploadFile = {
   author: string;
   fileSelected: File | undefined;
 };
+export type IUpdateUser = {
+  name: string;
+  surname: string;
+  city: string;
+};

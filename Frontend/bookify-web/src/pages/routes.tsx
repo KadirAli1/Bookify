@@ -9,6 +9,7 @@ import { rootCertificates } from "tls";
 import UploadForm from "./uploadForm";
 import HeaderDashboard from "./header-dashboard";
 import Books from "./books";
+import UpdateUserForm from "./settings";
 
 const Routes = () => {
   const { initializing, user } = React.useContext(SessionContext);
@@ -31,6 +32,9 @@ const Routes = () => {
                     </Route>
                     <Route path="/register">
                       <RegisterForm />
+                    </Route>
+                    <Route path="/settings">
+                      <UpdateUserForm />
                     </Route>
                     <Route path="/Login">
                       <LoginForm />
