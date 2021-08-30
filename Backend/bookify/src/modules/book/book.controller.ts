@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   Post,
   UploadedFile,
@@ -36,6 +37,17 @@ export class BookController {
   ) {
     return this.bookServices.uploadFile(user, body, file);
   }
+
+  // @UseInterceptors(FileInterceptor('file'))
+  // @Post('file')
+  // @AuthUser()
+  // uploadFile(
+  //   // @GetUser() user: UserDocument,
+  //   @Body() body: BookDTO,
+  //   @UploadedFile() file: Express.Multer.File,
+  // ) {
+  //   return this.bookServices.uploadFile(body, file);
+  // }
 
   @Delete(':book_id')
   @AuthUser()

@@ -17,9 +17,16 @@ export default {
   //   return http.put(apiPrefix + `/users/${sub}`, body);
   // },
   UploadFile: async (body: IUploadFile) => {
-    //jwtToken missed
+    // debugger;
+    const data = new FormData();
+    data.append("title", body.title);
+    data.append("year_of_publish", body.yop);
+    data.append("author", body.author);
+    body.fileSelected &&
+      data.append("file", body.fileSelected, body.fileSelected?.name);
+    console.log(body);
     const jwtToken = await firebase.auth().currentUser?.getIdToken();
-    return http.post(apiPrefix + "/books/file", {
+    return http.post(apiPrefix + "/books/file", data, {
       headers: { AUTHORIZATION: jwtToken },
     });
   },

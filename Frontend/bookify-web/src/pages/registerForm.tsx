@@ -5,6 +5,7 @@ import {
   Center,
   FormControl,
   FormLabel,
+  Heading,
   Input,
   useToast,
 } from "@chakra-ui/react";
@@ -23,6 +24,15 @@ export function RegisterForm() {
   const [city, setCity] = useState("");
   const [phone, setPhone] = useState("");
 
+  const handleModalResetState = () => {
+    setName("");
+    setLastName("");
+    setCity("");
+    setPhone("");
+    setEmail("");
+    setPasswod("");
+    setConfirmPassword("");
+  };
   const handleRegister = () => {
     let body: IRegisterUser = {
       email,
@@ -43,6 +53,7 @@ export function RegisterForm() {
           isClosable: true,
         });
         setIsLoading(false);
+        handleModalResetState();
       })
       .catch((error) => {
         {
@@ -55,6 +66,7 @@ export function RegisterForm() {
             isClosable: true,
           });
           setIsLoading(false);
+          handleModalResetState();
         }
       });
   };
@@ -64,6 +76,9 @@ export function RegisterForm() {
       <Center>
         <Box width="400px">
           <form action="">
+            <Heading textAlign={"center"} fontSize={"4xl"}>
+              Create User!
+            </Heading>
             <FormControl>
               <FormLabel>Name</FormLabel>
               <Input

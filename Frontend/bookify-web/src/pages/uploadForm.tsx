@@ -17,16 +17,42 @@ function UploadForm() {
   const [title, setTitle] = useState("");
   const [yop, setYop] = useState(""); // yop Year of publish
   const [author, setAuthor] = useState("");
-  const [uploadFile, setUploadFile] = useState("");
+  //   const [uploadFile, setUploadFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
+  const [fileSelected, setFileSelected] = useState<File>();
+
+  const handleImageChange = function (e: React.ChangeEvent<HTMLInputElement>) {
+    const fileList = e.target.files;
+
+    if (!fileList) return;
+
+    setFileSelected(fileList[0]);
+  };
+
+  //   const uploadFile = function (
+  //     e: React.MouseEvent<HTMLSpanElement, MouseEvent>
+  //   ) {
+  //     if (fileSelected) {
+  //       const formData = new FormData();
+  //       formData.append("image", fileSelected, fileSelected.name);
+  //     }
+  //   };
+  const handleModalResetState = () => {
+    setTitle("");
+    setYop("");
+    setAuthor("");
+    // setUploadFile();
+  };
 
   const handleUploadFile = () => {
     let body: IUploadFile = {
       title,
       yop,
       author,
+      fileSelected,
     };
+    // console.log(body);
     api
       .UploadFile(body)
       .then((response) => {
@@ -39,7 +65,7 @@ function UploadForm() {
           isClosable: true,
         });
         setIsLoading(false);
-        //   handleModalResetState();
+        handleModalResetState();
         //   history.push("/myEntity");
       })
       .catch((error) => {
@@ -53,7 +79,7 @@ function UploadForm() {
           isClosable: true,
         });
         setIsLoading(false);
-        // handleModalResetState();
+        handleModalResetState();
       });
   };
 
@@ -85,13 +111,11 @@ function UploadForm() {
               setAuthor(e.target.value);
             }}
           />
-          <input
+          <Input
             type="file"
-            value={uploadFile}
-            onChange={(e) => {
-              setUploadFile(e.target.value);
-            }}
-          ></input>
+            // value={uploadFile}
+            onChange={handleImageChange}
+          ></Input>
           <Button
             colorScheme="green"
             onClick={handleUploadFile}

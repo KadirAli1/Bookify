@@ -4,8 +4,8 @@ export class BookDTO {
   @IsString()
   title: string;
 
-  @IsString()
-  owner: string;
+  // @IsString()
+  // owner: string;
 
   @IsString()
   @IsOptional()
@@ -16,4 +16,7 @@ export class BookDTO {
 
   @IsString()
   author: string;
+
+  // fileSelected: Express.Multer.File;
+  file: Express.Multer.File;
 }

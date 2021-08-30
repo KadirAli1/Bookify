@@ -45,21 +45,13 @@ export class BookService {
     return await this.bookModel.find();
   }
 
-  async updateBooks(id: string, updateBookDTO: BookDTO) {
-    //Check if the sender of the request is existing OWNER of a book
-
-    const result = await this.bookModel.findByIdAndUpdate(id, updateBookDTO);
-    if (!result) return false;
-    return true;
-  }
-
   async uploadFile(
     user: UserDocument,
     updateBookDTO: BookDTO,
     file: Express.Multer.File,
   ) {
     try {
-      let { title, author, year_of_publish, owner } = updateBookDTO;
+      let { title, author, year_of_publish } = updateBookDTO;
 
       let baseDir = path.join(process.env.PWD, '/files/');
       let filePath = baseDir + file.originalname;
@@ -75,7 +67,7 @@ export class BookService {
         author,
         url: filePath,
         year_of_publish,
-        // user: owner,
+        user,
       });
 
       return result;
@@ -83,6 +75,45 @@ export class BookService {
       throw new HttpException('Validation failed', HttpStatus.BAD_REQUEST);
     }
   }
+
+  async updateBooks(id: string, updateBookDTO: BookDTO) {
+    //Check if the sender of the request is existing OWNER of a book
+
+    const result = await this.bookModel.findByIdAndUpdate(id, updateBookDTO);
+    if (!result) return false;
+    return true;
+  }
+
+  // async uploadFile(
+  //   // user: UserDocument,
+  //   updateBookDTO: BookDTO,
+  //   file: Express.Multer.File,
+  // ) {
+  //   try {
+  //     let { title, author, year_of_publish, owner } = updateBookDTO;
+
+  //     let baseDir = path.join(process.env.PWD, '/files/');
+  //     let filePath = baseDir + file.originalname;
+  //     fs.writeFile(filePath, file.buffer, (writeFileError) => {
+  //       if (writeFileError) {
+  //         return;
+  //       }
+  //     });
+
+  //     //DB
+  //     const result = await this.bookModel.create({
+  //       title,
+  //       author,
+  //       url: filePath,
+  //       year_of_publish,
+  //       // user: owner,
+  //     });
+
+  //     return result;
+  //   } catch (err) {
+  //     throw new HttpException('Validation failed', HttpStatus.BAD_REQUEST);
+  //   }
+  // }
 
   //Delete book
   async deleteFile(user: UserDocument, book_id: string): Promise<Book> {

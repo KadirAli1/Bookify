@@ -8,4 +8,5 @@ export type IUploadFile = {
   title: string;
   yop: string;
   author: string;
+  fileSelected: File | undefined;
 };

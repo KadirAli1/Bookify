@@ -9,8 +9,8 @@ export class Book {
   @Prop({ required: true })
   title: string;
 
-  // @Prop({ type: mongoose.Schema.Types.ObjectId, ref: User.name })
-  // owner: string;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+  owner: string;
 
   @Prop()
   year_of_publish: string;
