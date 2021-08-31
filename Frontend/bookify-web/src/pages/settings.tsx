@@ -10,6 +10,7 @@ import {
   toast,
   useToast,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { useContext, useState } from "react";
 import api from "../api";
 import { IUpdateUser } from "../interfaces";
@@ -20,6 +21,7 @@ function UpdateUserForm() {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [city, setCity] = useState("");
+  const [email, setEmail] = useState<string | null>("");
   const [isLoading] = useState(false);
   const toast = useToast();
 
@@ -30,6 +32,7 @@ function UpdateUserForm() {
         surname,
         city,
       };
+      console.log(body);
       api
         .updateUser(user?.uid, body)
         .then((response) => {
@@ -55,9 +58,24 @@ function UpdateUserForm() {
           });
         });
     }
-
-    // console.log(body);
   };
+  useEffect(() => {
+    if (user) {
+      if (user.displayName) setName(user.displayName);
+      setEmail(user.email);
+
+      api
+        .getUserDetails(user.uid)
+        .then((response) => {
+          let { surname, city } = response.data;
+          setSurname(surname);
+          setCity(city);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [user]);
 
   return (
     <div className="UpdateForm">
@@ -71,7 +89,7 @@ function UpdateUserForm() {
               mb={3}
               type="text"
               placeholder="Name"
-              value={name}
+              value={name ? name : ""}
               onChange={(e) => {
                 setName(e.target.value);
               }}
@@ -81,7 +99,7 @@ function UpdateUserForm() {
               mb={3}
               type="text"
               placeholder="Surname"
-              value={surname}
+              value={surname ? surname : ""}
               onChange={(e) => {
                 setSurname(e.target.value);
               }}
@@ -91,9 +109,19 @@ function UpdateUserForm() {
               mb={3}
               type="text"
               placeholder="Title"
-              value={city}
+              value={city ? city : ""}
               onChange={(e) => {
                 setCity(e.target.value);
+              }}
+            />
+            <Input
+              mb={3}
+              disabled
+              type="email"
+              value={email ? email : ""}
+              placeholder="enter your email"
+              onChange={(e) => {
+                setEmail(e.target.value);
               }}
             />
 
@@ -102,6 +130,7 @@ function UpdateUserForm() {
               colorScheme="teal"
               onClick={handleUpdateUser}
               isLoading={isLoading}
+              disabled={!(name && name.length > 0)}
             >
               Update
             </Button>

@@ -16,6 +16,11 @@ export default {
   updateUser: async (sub: string, body: IUpdateUser) => {
     return http.put(apiPrefix + `/users/${sub}`, body);
   },
+
+  getUserDetails: async (sub: string) => {
+    return http.get(apiPrefix + `/users/${sub}`);
+  },
+
   UploadFile: async (body: IUploadFile) => {
     // debugger;
     const data = new FormData();

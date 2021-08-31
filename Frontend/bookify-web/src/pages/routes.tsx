@@ -10,7 +10,7 @@ import UploadForm from "./uploadForm";
 import HeaderDashboard from "./header-dashboard";
 import Books from "./books";
 import UpdateUserForm from "./settings";
-
+import MyBooks from "./myBooks";
 const Routes = () => {
   const { initializing, user } = React.useContext(SessionContext);
   return (
@@ -36,6 +36,10 @@ const Routes = () => {
                     <Route path="/settings">
                       <UpdateUserForm />
                     </Route>
+                    <Route path="/myBooks">
+                      <MyBooks />
+                    </Route>
+
                     <Route path="/Login">
                       <LoginForm />
                     </Route>

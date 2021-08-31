@@ -152,6 +152,14 @@ function HeaderDashboard() {
                       >
                         <MenuItem fontWeight="bold">Upload File</MenuItem>
                       </Link>
+
+                      <Link
+                        as={ReactRouterLink}
+                        to="/myBooks"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <MenuItem fontWeight="bold">My Books</MenuItem>
+                      </Link>
                       {/* <Link
                 as={ReactRouterLink}
                 to="/"
@@ -167,11 +175,12 @@ function HeaderDashboard() {
                       >
                         <MenuItem fontWeight="bold">Settings</MenuItem>
                       </Link>
-                      <Link
+                      {/* <Link
                         as={ReactRouterLink}
                         to="/settings"
                         style={{ textDecoration: "none" }}
-                      >
+                      ></Link> */}
+                      <Link>
                         <MenuItem
                           onClick={() => {
                             firebaseAPI.signOut();
